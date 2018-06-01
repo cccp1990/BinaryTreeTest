@@ -80,6 +80,27 @@ static void inOrderBinaryTreeNode(BinaryTreeNode *node) {
     }
 }
 
++ (void)postOrderBinaryTree:(BinaryTree *)tree {
+    if (tree.rootNode) {
+        postOrderBinaryTreeNode(tree.rootNode);
+    } else {
+        printf("\nempty tree\n");
+    }
+}
+
+static void postOrderBinaryTreeNode(BinaryTreeNode *node) {
+    if (node) {
+        if (node.leftNode) {
+            postOrderBinaryTreeNode(node.leftNode);
+        }
+        
+        if (node.rightNode) {
+            postOrderBinaryTreeNode(node.rightNode);
+        }
+        
+        printf("%ld ", node.value);
+    }
+}
 + (void)destroyBinaryTree:(BinaryTree *)tree {
     if (tree.rootNode) {
         if (tree.rootNode.leftNode) {
@@ -93,6 +114,7 @@ static void inOrderBinaryTreeNode(BinaryTreeNode *node) {
     }
     printf("destroyed");
 }
+
 
 static void destroyBinaryTreeNode(BinaryTreeNode *node) {
     if (node) {
@@ -109,4 +131,43 @@ static void destroyBinaryTreeNode(BinaryTreeNode *node) {
     }
 }
 
++ (BinaryTree *)invertBinaryTree:(BinaryTree *)tree {
+    if (tree.rootNode) {
+        invertNode(tree.rootNode);
+    }
+    
+    return tree;
+}
+
+static void invertNode(BinaryTreeNode *node) {
+    if (node) {
+        BinaryTreeNode *tempNode = node.leftNode;
+        node.leftNode = node.rightNode;
+        node.rightNode = tempNode;
+        tempNode = nil;
+        invertNode(node.leftNode);
+        invertNode(node.rightNode);
+    }
+}
+
++ (void)levelOrderBinaryTree:(BinaryTree *)tree {
+    if (tree.rootNode) {
+        NSMutableArray *array = [NSMutableArray arrayWithCapacity:0];
+        [array addObject:tree.rootNode];
+        while (array.count > 0) {
+            BinaryTreeNode *node = array[0];
+            printf("%ld ", node.value);
+            [array removeObjectAtIndex:0];
+            if (node.leftNode) {
+                [array addObject:node.leftNode];
+            }
+            
+            if (node.rightNode) {
+                [array addObject:node.rightNode];
+            }
+        }
+    } else {
+        printf("\nempty\n");
+    }
+}
 @end

@@ -21,8 +21,10 @@
     BinaryTree *tree = [[BinaryTree alloc] initBinaryTreeByArray:array];
     [BinaryTree preOrderBinaryTree:tree];
     [BinaryTree inOrderBinaryTree:tree];
-    [BinaryTree destroyBinaryTree:tree];
-    [BinaryTree inOrderBinaryTree:tree];
+    [BinaryTree levelOrderBinaryTree:tree];
+    BinaryTree *tree2 = [BinaryTree invertBinaryTree:tree];
+//    [BinaryTree destroyBinaryTree:tree];
+    [BinaryTree inOrderBinaryTree:tree2];
 
 
     // Do any additional setup after loading the view, typically from a nib.
